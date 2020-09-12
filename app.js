@@ -9,16 +9,17 @@ function capitalize(nombre){
 
 
 app.get('/', (req, res) => {
+    const userAgent = req.headers['user-agent'];
 
-res.send('<form action="/" method="post">'+
-'<input type="text" name="name">'+
-'<button type="submit"> enviar </button>'+
-'</form>');
-});
-app.post('/', (req, res) => {
-const {name} = req.body;
-res.send("<h1>Hola " + capitalize(name) + "!</h1>");
-
-});
+res.send(userAgent)
+// res.send('<form action="/" method="post">'+
+// '<input type="text" name="name">'+
+// '<button type="submit"> enviar </button>'+
+// '</form>');
+// });
+// app.post('/', (req, res) => {
+// const {name} = req.body;
+// res.send("<h1>Hola " + capitalize(name) + "!</h1>");
+    });
 
 app.listen(3000, () => console.log('Listening on port 3000!'))
