@@ -1,12 +1,24 @@
+const { urlencoded } = require('express');
 const express = require('express');
 const app = express();
 
-app.get('/makers/:name', (req, res) => {
+function capitalize(nombre){
+    return nombre.charAt(0).toUpperCase() + nombre.slice(1)
+};
+ app.use(express.urlencoded({extended : true}));
 
-if (req.params.name){
-    res.send("<h1>Hola " + req.params.name.charAt(0).toUpperCase() + req.params.name.slice(1) + "!</h1>");
-}
-res.send("<h1>Hola desconocido!</h1>"); 
+
+app.get('/', (req, res) => {
+
+res.send('<form action="/" method="post">'+
+'<input type="text" name="name">'+
+'<button type="submit"> enviar </button>'+
+'</form>');
+});
+app.post('/', (req, res) => {
+const {name} = req.body;
+res.send("<h1>Hola " + capitalize(name) + "!</h1>");
+
 });
 
 app.listen(3000, () => console.log('Listening on port 3000!'))
